@@ -126,10 +126,10 @@ class TasksController extends Controller
         $task->status = $request->status;
         $task->save();
         
-        // return view('/', $data);
-        
-         return redirect('/');
-        
+        if (\Auth::id() !== $task->user_id) {
+             $task->update();
+          }
+           return redirect('/');
     }
 
     /**
